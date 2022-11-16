@@ -1,0 +1,54 @@
+#server:
+#  port: 9001
+#spring:
+#  application:
+#    name: micservice-movie
+#eureka:
+#  client:
+#    register-with-eureka: true # 作为客户端需要注册到Eureka
+#    fetch-registry: true  # 作为客户端需要从Eureka获取注册信息
+#    service-url:  # 客户端注册地址
+#      defaultZone:defaultZone: http://127.0.0.1:9999/eureka   #http://192.168.0.45:9999/eureka
+#      #修改提供方获取注册信息的间隔时间
+#    registry-fetch-interval-seconds: 5
+#  instance:
+#    prefer-ip-address: true  # 优先使用该服务的IP地址注册到Eureka，在生产环境建议改为true
+## 修改Ribbon的负载均衡算法
+##microservice-user:
+##  ribbon:
+##    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+## 开启Hystrix
+#feign:
+#  hystrix:
+#    enabled: true
+server:
+  port: 9001
+spring:   # 服务名称，暂时没有用，讲到SpringCloud服务调用的时候才会有用。
+  application:
+    name: microservice-movie
+  datasource:
+    url: jdbc:mysql://192.168.1.77:3306/springcloud?characterEncoding=UTF8&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+  jpa:
+    show-sql: true # 是否打印sql语句
+    generate-ddl: true # 是否自动建表
+    database: mysql # jpa连接的数据库类型
+    mybatis:
+      # model的包　#开启驼峰uName自动映射到u_name
+      type-aliases-package: cn.sm1234.movie.mapper
+      mapper-locations: classpath:mapper/*.xml
+eureka:
+  client:
+    register-with-eureka: true # 作为客户端需要注册到Eureka
+    fetch-registry: true  # 作为客户端需要从Eureka获取注册信息
+    service-url:  # 客户端注册地址
+      defaultZone: http://192.168.1.82:9999/eureka #http://192.168.0.45:9999/eureka
+  instance:
+    # 优先使用该服务的IP地址注册到Eureka，在生产环境建议改为true
+    prefer-ip-address: true
+    # 修改续约间隔时间
+    lease-renewal-interval-in-seconds: 5
+    # 修改服务失效时间
+    lease-expiration-duration-in-seconds: 10

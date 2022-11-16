@@ -1,0 +1,20 @@
+spring:
+  cloud:
+    config:
+      #uri: http://127.0.0.1:12000  # 连接的SpringCloudConfig服务端地址
+      name: movie  # 配置文件的前缀
+      profile: dev  # 配置文件的后缀
+      label: trunk  # 需要获取仓库分支名称
+      discovery:  # 从Eureka发现SpringCloudConfig具体服务
+        enabled: true
+        service-id: microservice-config
+  rabbitmq:
+    host: 192.168.66.138
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://127.0.0.1:8888/eureka
+  instance:
+    prefer-ip-address: true
